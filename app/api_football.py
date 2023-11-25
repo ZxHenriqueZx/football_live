@@ -1,8 +1,7 @@
 import requests
 import dotenv
 from os import environ as env
-
-from utils import is_int, input_filter
+from app.utils import is_int, input_filter
 
 dotenv.load_dotenv()
 
@@ -43,14 +42,3 @@ class Api:
             else:
                 print('Index Errado, escolha umas das opções acima')
 
-if __name__ == '__main__':
-    headers = {
-        "X-RapidAPI-Key": env['API_KEY'],
-        "X-RapidAPI-Host": env['API_HOST'],
-    }
-
-    app = Api(headers)
-
-    app.team_fav("fla")
-
-    print(app.team)

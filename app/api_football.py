@@ -10,6 +10,7 @@ class Api:
         self.url = env['URL_API']
         self.endpoints = {
             "times": "teams",
+            "campeonatos": "leagues"
         }
 
         self._headers = headers
@@ -22,7 +23,6 @@ class Api:
             params=params) as re:
 
             self.data = re.json()['response']
-            #print(self.data)
 
     def team_fav(self, team_name):
         self.get("times", {'search': team_name})
@@ -42,3 +42,19 @@ class Api:
             else:
                 print('Index Errado, escolha umas das opções acima')
 
+
+    def team_leagues(self):
+        if self.team == None:
+            print('Time favorito não está definido!')
+            #return
+       
+        self.get("campeonatos", {"team": 121, "season": 2023})
+
+        current_leagues = []
+        for i in self.data:
+            current_leagues.append(dict(
+                nome=i['league']['name'],
+                id=i['league']['id']
+            ))
+        
+        self.leagues = current_leagues

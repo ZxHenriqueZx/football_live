@@ -11,6 +11,27 @@ if __name__ == "__main__":
 
     football_live = Api(headers)
 
-    football_live.team_fav('manchester')
+    options = [
+        'Definir Time preferido',
+        'Sair',
+    ]
 
-    football_live.team_leagues()
+    def menu():
+        for i, op in enumerate(options):
+            print(i, op)
+
+        index_option = input_filter('Escolha uma opção: ', int)
+
+        return index_option
+
+    print('=== FOOTBALL LIVE ===')
+    while True:
+        option = menu()
+
+        if options[option] == 'Definir Time preferido':
+            football_live.team_fav(input_filter('Digite o nome do Time: ', str))
+            continue 
+
+        if options[option] == 'Sair':
+            break
+

@@ -59,4 +59,4 @@ class Api:
         
         self.leagues = current_leagues
 
-        print(self.leagues)
+

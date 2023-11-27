@@ -11,4 +11,6 @@ if __name__ == "__main__":
 
     football_live = Api(headers)
 
-    football_live.team_fav('fla')
+    football_live.team_fav('manchester')
+
+    football_live.team_leagues()

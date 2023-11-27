@@ -48,7 +48,7 @@ class Api:
             print('Time favorito não está definido!')
             #return
        
-        self.get("campeonatos", {"team": 121, "season": 2023})
+        self.get("campeonatos", {"team": self.team['team']['id'], "season": 2023})
 
         current_leagues = []
         for i in self.data:
@@ -58,3 +58,5 @@ class Api:
             ))
         
         self.leagues = current_leagues
+
+        print(self.leagues)

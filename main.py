@@ -17,6 +17,7 @@ if __name__ == "__main__":
     ]
 
     def menu():
+        print()
         for i, op in enumerate(options):
             print(i, op)
 
@@ -26,6 +27,7 @@ if __name__ == "__main__":
 
     print('=== FOOTBALL LIVE ===')
     while True:
+        print()
         option = menu()
 
         if options[option] == 'Definir Time preferido':

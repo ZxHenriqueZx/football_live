@@ -34,6 +34,7 @@ class Menu:
             if self._options[option] == "Definir Time favorito":
                 team_name = input_filter('Digite o nome do time: ', str)
                 self.api.team_fav(team_name)
+                self.api.team_leagues()
 
             if self._options[option] == "Sair":
                 break

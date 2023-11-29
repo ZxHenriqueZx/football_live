@@ -1,5 +1,6 @@
 import requests
 import dotenv
+import datetime
 from os import environ as env
 from app.utils import is_int, input_filter
 
@@ -10,7 +11,8 @@ class Api:
         self.url = env['URL_API']
         self.endpoints = {
             "times": "teams",
-            "campeonatos": "leagues"
+            "campeonatos": "leagues",
+            "jogos": "fixtures",
         }
 
         self._headers = headers
@@ -44,11 +46,10 @@ class Api:
 
 
     def team_leagues(self):
-        if self.team == None:
-            print('Time favorito não está definido!')
-            #return
-       
-        self.get("campeonatos", {"team": self.team['team']['id'], "season": 2023})
+        self.get(
+            "campeonatos", 
+            {"team": self.team['team']['id'],"season": 2023}
+        )
 
         current_leagues = []
         for i in self.data:
@@ -60,3 +61,23 @@ class Api:
         self.leagues = current_leagues
 
 
+    def fixtures(self):
+        self.get(
+            "jogos",
+            {"team": 121, "last": 5}
+        )
+
+        for i in self.data:
+            home_name = i['teams']['home']['name']
+            home_goals = i['goals']['home'] 
+
+            away_name = i['teams']['away']['name']
+            away_goals = i['goals']['away']
+
+            placar = f'{home_name} {home_goals} X {away_goals} {away_name}'
+            data_str = i['fixture']['date']
+
+            data = datetime.datetime.fromisoformat(data_str)
+    
+            print(placar)
+            print(data.strftime('%d/%m/%Y - %H:%M:%S'))

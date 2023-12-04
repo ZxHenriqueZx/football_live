@@ -7,6 +7,7 @@ class Menu:
         self.api = api
         self._options = [
             'Definir Time favorito',
+            'Calendário',
             'Sair'
         ]
 
@@ -23,7 +24,7 @@ class Menu:
             print(23*'-')
             print(f'=== {self.name} ===')
 
-            if self.api.team == None:
+            if self.api.team == None or self.api.team == 'Não Definido': 
                 self.api.team = 'Não Definido'
                 print('Time favorito:', self.api.team)
             else:
@@ -31,13 +32,17 @@ class Menu:
 
             option = self.options()
 
+
             if self._options[option] == "Definir Time favorito":
                 team_name = input_filter('Digite o nome do time: ', str)
                 self.api.team_fav(team_name)
                 self.api.team_leagues()
 
+            if self._options[option] == "Calendário":
+                self.api.fixtures()
+
             if self._options[option] == "Sair":
                 break
-
+            
             print(23*'-')
 

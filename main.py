@@ -12,6 +12,6 @@ if __name__ == "__main__":
 
     cli = Menu('FOOTBALL LIVE', football_live)
 
-    #cli.start()
+    cli.start()
 
-    football_live.fixtures()
+    #football_live.fixtures()

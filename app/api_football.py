@@ -1,6 +1,6 @@
 import requests
 import dotenv
-import datetime
+from datetime import *
 from os import environ as env
 from app.utils import is_int, input_filter
 
@@ -67,6 +67,7 @@ class Api:
             {"team": 121, "last": 5}
         )
 
+        self.last_games = self.data
         for i in self.data:
             home_name = i['teams']['home']['name']
             home_goals = i['goals']['home'] 
@@ -75,9 +76,14 @@ class Api:
             away_goals = i['goals']['away']
 
             placar = f'{home_name} {home_goals} X {away_goals} {away_name}'
-            data_str = i['fixture']['date']
+            estadio = i['fixture']['venue']['name']
 
-            data = datetime.datetime.fromisoformat(data_str)
-    
+            data_str = i['fixture']['date']
+            tz_sp = timezone(timedelta(hours=-3))
+            data = datetime.fromisoformat(data_str).astimezone(tz_sp) 
+     
+            #print(i)
             print(placar)
             print(data.strftime('%d/%m/%Y - %H:%M:%S'))
+            print(f'Estádio: {estadio}')
+            print()

@@ -10,5 +10,4 @@ def input_filter(value, _type):
         _input = _type(input(value))
         return _input
     except ValueError:
-        print(f'Este valor não é do tipo: {_type}')
-
+        raise ValueError(f'Este valor não é do tipo: {_type}')

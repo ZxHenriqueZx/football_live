@@ -39,9 +39,12 @@ class Menu:
                 os.system('clear')
     
             if self._options[option] == "Calendário":
+                if self.api.team == 'Não Definido':
+                    print('Time favorito não definido')
+                    continue
+
                 self.api.fixtures()
                 data = self.api.last_games
-                print(data)
                 self.calendario(data)
 
             if self._options[option] == "Sair":

@@ -36,6 +36,9 @@ class Api:
             print(f'{i} - {team_name} - {team_country}')
 
         while True:
+            if len(self.data) == 0:
+                print('Time não encontrado')
+                continue
             index_team = input_filter('Escolha o time: ', int)
 
             if index_team in range(len(self.data)):

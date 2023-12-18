@@ -38,7 +38,8 @@ class Api:
         while True:
             if len(self.data) == 0:
                 print('Time não encontrado')
-                continue
+                break
+
             index_team = input_filter('Escolha o time: ', int)
 
             if index_team in range(len(self.data)):

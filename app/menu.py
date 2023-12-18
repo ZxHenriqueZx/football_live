@@ -1,5 +1,6 @@
 from app.utils import input_filter
 import os
+from time import sleep
 from datetime import *
 
 class Menu:
@@ -35,37 +36,45 @@ class Menu:
                 os.system('clear')
                 team_name = input_filter('Digite o nome do time: ', str)
                 self.api.team_fav(team_name)
-                self.api.team_leagues()
+
+                if self.api.team == 'Não Definido':
+                    sleep(2)
+                else:
+                    self.api.team_leagues()
+
                 os.system('clear')
     
             if self._options[option] == "Calendário":
                 if self.api.team == 'Não Definido':
                     print('Time favorito não definido')
+                    sleep(2)
+                    os.system('clear')
                     continue
 
                 self.api.fixtures()
-                data = self.api.last_games
-                self.calendario(data)
+                data = [self.api.last_games]
+                self.calendario(fixtures=data)
 
             if self._options[option] == "Sair":
                 break
 
+       
     def calendario(fixtures):
         for i in fixtures:
             home_name = i['teams']['home']['name']
             home_goals = i['goals']['home'] 
-
+        
             away_name = i['teams']['away']['name']
             away_goals = i['goals']['away']
-
+        
             placar = f'{home_name} {home_goals} X {away_goals} {away_name}'
             estadio = i['fixture']['venue']['name']
-
+        
             data_str = i['fixture']['date']
             tz_sp = timezone(timedelta(hours=-3))
             data = datetime.fromisoformat(data_str).astimezone(tz_sp) 
-     
-            #print(i)
+        
+            print(i)
             print(placar)
             print(data.strftime('%d/%m/%Y - %H:%M:%S'))
             print(f'Estádio: {estadio}')
